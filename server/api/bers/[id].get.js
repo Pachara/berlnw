@@ -1,15 +1,9 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
-
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
   // Get the `id` parameter from the URL (this is the sum passed to the API)
   const { id } = event.context.params;
 
-  // Path to the ber.json file
-  const filePath = join(process.cwd(), 'assets', 'ber.json');
-
-  // Read and parse the JSON file
-  const data = JSON.parse(readFileSync(filePath, 'utf-8'));
+  // Fetch the JSON file from the public directory
+  const data = await $fetch('/ber.json');
 
   // Find the result by the sum (id)
   const result = data.results[id];
