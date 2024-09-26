@@ -16,7 +16,7 @@ export default defineEventHandler((event) => {
     // If file is not found or there's an issue reading it, return an error
     return {
       status: 'error',
-      message: 'Error reading JSON file',
+      message: 'Error reading JSON file', 
     };
   }
 
