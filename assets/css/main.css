@@ -1,0 +1,50 @@
+
+@font-face {
+    font-family: 'SukhumvitSet';
+    font-style: normal;
+    font-weight: 100;
+    src: url('/fonts/SukhumvitSet-Thin.woff2') format('woff2'),
+         url('/fonts/SukhumvitSet-Thin.ttf') format('truetype');
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'SukhumvitSet';
+    font-style: normal;
+    font-weight: 200;
+    src: url('/fonts/SukhumvitSet-Text.woff2') format('woff2'),
+         url('/fonts/SukhumvitSet-Text.ttf') format('truetype');
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'SukhumvitSet';
+    font-style: normal;
+    font-weight: 900;
+    src: url('/fonts/SukhumvitSet-Bold.woff2') format('woff2'),
+         url('/fonts/SukhumvitSet-Bold.ttf') format('truetype');
+    font-display: swap;
+  }
+  
+  
+  body {
+    font-family: 'SukhumvitSet' !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+    touch-action: manipulation;
+  }
+  
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  * {
+    box-sizing: border-box; /* Ensures padding and borders are included in the element's total width */
+  }
+  
+  
+  
+  
+  
+  

@@ -1,0 +1,70 @@
+.text-000 { color: #000 !important; }
+.text-111 { color: #111 !important; }
+.text-222 { color: #222 !important; }
+.text-333 { color: #333 !important; }
+.text-444 { color: #444 !important; }
+.text-555 { color: #555 !important; }
+.text-666 { color: #666 !important; }
+.text-777 { color: #777 !important; }
+.text-888 { color: #888 !important; }
+.text-999 { color: #999 !important; }
+.text-aaa { color: #aaa !important; }
+.text-bbb { color: #bbb !important; }
+.text-ccc { color: #ccc !important; }
+.text-ddd { color: #ddd !important; }
+.text-eee { color: #eee !important; }
+.text-fff { color: #fff !important; }
+.text-line { color: #02C755 !important; }
+.text-orange { color: orange !important; }
+
+
+.bg-000 { background-color: #000 !important; }
+.bg-111 { background-color: #111 !important; }
+.bg-222 { background-color: #222 !important; }
+.bg-333 { background-color: #333 !important; }
+.bg-444 { background-color: #444 !important; }
+.bg-555 { background-color: #555 !important; }
+.bg-666 { background-color: #666 !important; }
+.bg-777 { background-color: #777 !important; }
+.bg-888 { background-color: #888 !important; }
+.bg-999 { background-color: #999 !important; }
+.bg-aaa { background-color: #aaa !important; }
+.bg-bbb { background-color: #bbb !important; }
+.bg-ccc { background-color: #ccc !important; }
+.bg-ddd { background-color: #ddd !important; }
+.bg-eee { background-color: #eee !important; }
+.bg-line {background-color: #02C755 !important;}
+.bg-amber {background-color: #ffc720 !important;}
+
+.border-000 { border-color: #000 !important; }
+.border-111 { border-color: #111 !important; }
+.border-222 { border-color: #222 !important; }
+.border-333 { border-color: #333 !important; }
+.border-444 { border-color: #444 !important; }
+.border-555 { border-color: #555 !important; }
+.border-666 { border-color: #666 !important; }
+.border-777 { border-color: #777 !important; }
+.border-888 { border-color: #888 !important; }
+.border-999 { border-color: #999 !important; }
+.border-aaa { border-color: #aaa !important; }
+.border-bbb { border-color: #bbb !important; }
+.border-ccc { border-color: #ccc !important; }
+.border-ddd { border-color: #ddd !important; }
+.border-eee { border-color: #eee !important; }
+.border-line { border-color: #02C755 !important; }
+
+.text-bigger{
+  font-size:1.2em !important
+}
+.text-smaller{
+  font-size:0.8em !important
+}
+.font-border{
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+
+
+
+
+
