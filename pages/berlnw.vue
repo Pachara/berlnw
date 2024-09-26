@@ -1,32 +1,18 @@
 <script setup>
+
 definePageMeta({
     layout: 'berlnw'
 })
 
-const count = ref(0)
-
-
-const increase = () => {
-    count.value++
-}
-const decrease = () => {
-    return count.value <= 0 ? null : count.value--
-}
-
-
-
 const phone_number = ref(null)
 
-const isPhoneNumber = (number) => {
-    const phoneRegex = /^0\d{9}$/;
-    return phoneRegex.test(number);
-}
 
 // Computed property for phone number validation
 const isPhoneNumberValid = computed(() => {
-    return isPhoneNumber(phone_number.value);
+    if(!phone_number.value) return false
+    const phoneRegex = /^0\d{9}$/;
+    return phoneRegex.test(phone_number.value);
 })
-
 
 const luckyNumberSum = computed(() => {
     // เช็คว่า phone_number ไม่ใช่ null และเป็นตัวเลขเท่านั้น 
@@ -39,11 +25,8 @@ const luckyNumberSum = computed(() => {
         .reduce((sum, num) => sum + num, 0); // รวมตัวเลขทั้งหมด 
 });
 
-
-
 // Define the search function to call the API
 const search = async (sum) => {
-
     try {
         // Call the API with the entered sum
         const response = await $fetch(`/api/bers/${sum}`);
@@ -54,9 +37,6 @@ const search = async (sum) => {
         errorMessage.value = error.data?.message || 'An error occurred while fetching the result';
     }
 };
-
-
-
 
 
 const fortune = ref(null)
@@ -81,6 +61,7 @@ watch(phone_number, async (newVal) => {
 
 // Computed property to calculate the sum of the scores
 const sumOfScores = computed(() => {
+    if(!isPhoneNumberValid.value) return false
     if (fortune.value && fortune.value.score) {
         const { luck, career, relationship, health, wealth } = fortune.value.score;
         return luck + career + relationship + health + wealth;
@@ -121,7 +102,7 @@ const progressPercentage = computed(() => {
                 </div>
             </div>
 
-            <div v-if="fortune" class="mt-3 m-auto" :class="{
+            <div v-if="fortune && isPhoneNumberValid" class="mt-3 m-auto" :class="{
                 'text-success': fortune.category == 'very_fortunate',
                 'text-info': fortune.category == 'fortunate',
                 'text-warning': fortune.category == 'moderately_fortunate',
@@ -130,7 +111,8 @@ const progressPercentage = computed(() => {
 
 
 
-            <div v-if="sumOfScores" class="mt-2 m-auto" style="width:300px">
+            <div v-if="sumOfScores && isPhoneNumberValid" class="mt-2 m-auto" style="width:300px">
+             
                 <!-- Bootstrap Progress Bar -->
                 <div class="progress" style="height: 30px;">
                     <div class="progress-bar fs-5 text-dark" role="progressbar"
