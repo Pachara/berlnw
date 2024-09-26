@@ -108,7 +108,7 @@ const progressPercentage = computed(() => {
         <div class="input_container border rounded-2 p-2 text-center bg-111" style="border-color:#444 !important;">
 
             <h1 class="pt-3 fs-3 text-888 fw-bold mb-3">กรุณาใส่เบอร์โทรศัพท์</h1>
-            <input placeholder="เบอร์โทรศัพท์ 10 หลัก" v-model="phone_number" class="mb-3"
+            <input placeholder="เบอร์โทรศัพท์ 10 หลัก" v-model="phone_number" type="tel"  class="mb-3"
                 :class="{ 'text-orange': phone_number }" style="font-size:1.8em;margin-bottom:5px;width:300px;" />
 
 
