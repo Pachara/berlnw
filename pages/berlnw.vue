@@ -80,6 +80,49 @@ const progressPercentage = computed(() => {
     return 0; // return 0 if no sumOfScores available
 });
 
+const fetchRandomLuckyPhoneNumber = async () => {
+  try {
+    // Call the random_berlnw API
+    const data = await $fetch('/api/bers/random_berlnw', {
+      method: 'GET',
+    });
+
+    // Check if the API response contains the 'success' status
+    if (data && data.status === 'success') {
+      return data;
+    } else {
+      throw new Error(data?.message || 'No valid result found');
+    }
+  } catch (err) {
+    // Log or handle the error
+    console.error(err.message);
+    return {
+      status: 'error',
+      message: err.message || 'An unknown error occurred',
+    };
+  }
+};
+
+
+const randomPhoneNumberData = ref(null);
+const error = ref(null);
+
+// Fetch the random phone number when the component is mounted
+onMounted(async () => {
+  try {
+    const response = await fetchRandomLuckyPhoneNumber();
+
+    if (response.status === 'success') {
+        console.log(1111)
+      randomPhoneNumberData.value = response;
+    } else {
+      error.value = response.message;
+    }
+  } catch (err) {
+    error.value = err.message;
+  }
+});
+
 
 
 </script>
@@ -89,8 +132,9 @@ const progressPercentage = computed(() => {
         <div class="input_container border rounded-2 p-2 text-center bg-111" style="border-color:#444 !important;">
 
             <h1 class="pt-3 fs-3 text-888 fw-bold mb-3">กรุณาใส่เบอร์โทรศัพท์</h1>
-            <input placeholder="เบอร์โทรศัพท์ 10 หลัก" v-model="phone_number" type="tel"  class="mb-3"
+            <input placeholder="เบอร์โทรศัพท์ 10 หลัก" v-model="phone_number" type="tel"  class="mb-3 me-2"
                 :class="{ 'text-orange': phone_number }" style="font-size:1.8em;margin-bottom:5px;width:300px;" />
+          
 
 
             <div class="border m-auto rounded-3 d-flex align-items-center justify-content-center"
@@ -165,6 +209,10 @@ const progressPercentage = computed(() => {
                     </span>
                 </div>
                 <span class="text-555 fs-5">ผลทั้งหมด {{ sumOfScores }}</span>
+            </div>
+
+            <div v-if="randomPhoneNumberData" class="mt-2 fs-4 text-ddd">
+                {{ randomPhoneNumberData.phoneNumber  }}
             </div>
 
             <span v-if="(phone_number?.length == 10) && !isPhoneNumberValid"
