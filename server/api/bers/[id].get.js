@@ -5,8 +5,9 @@ export default defineEventHandler((event) => {
   // Get the `id` parameter from the URL (this is the sum passed to the API)
   const { id } = event.context.params;
 
-  // Path to the ber.json file in the public folder
-  const filePath = join(process.cwd(), 'public', 'ber.json');
+  // Path to the ber.json file in the public directory
+  // Note: We are directly referencing the 'public' directory
+  const filePath = join('public', 'ber.json');
 
   // Read and parse the JSON file
   let data;
@@ -16,7 +17,7 @@ export default defineEventHandler((event) => {
     // If file is not found or there's an issue reading it, return an error
     return {
       status: 'error',
-      message: 'Error reading JSON file', 
+      message: 'Error reading JSON file',
     };
   }
 
