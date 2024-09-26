@@ -3,7 +3,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     // Fetch the JSON file from the correct path (it's served as a static file)
-    const data = await $fetch('/ber.json');
+    const data = await $fetch('https://berlnw.vercel.app/ber.json');
 
     // Find the result by the sum (id)
     const result = data.results[id];
