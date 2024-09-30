@@ -1,6 +1,7 @@
 export default defineEventHandler(async (event) => {
   const { id } = event.context.params;
 
+
   try {
     // Fetch the JSON file from the correct path (it's served as a static file)
     const data = await $fetch('https://berlnw.vercel.app/ber.json');

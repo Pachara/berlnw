@@ -9,10 +9,11 @@ const phone_number = ref(null)
 
 // Computed property for phone number validation
 const isPhoneNumberValid = computed(() => {
-    if(!phone_number.value) return false
-    const phoneRegex = /^0\d{9}$/;
-    return phoneRegex.test(phone_number.value);
-})
+    const phoneRegex = /^0[89]\d{8}$/;
+    return phone_number.value ? phoneRegex.test(phone_number.value) : false;
+});
+
+
 
 const luckyNumberSum = computed(() => {
     // เช็คว่า phone_number ไม่ใช่ null และเป็นตัวเลขเท่านั้น 
@@ -29,7 +30,9 @@ const luckyNumberSum = computed(() => {
 const search = async (sum) => {
     try {
         // Call the API with the entered sum
-        const response = await $fetch(`/api/bers/${sum}`);
+        const response = await $fetch(`/api/bers/${sum}`, {
+            method: 'GET',
+        });
         if (response.status == 'success') return response.result
 
     } catch (error) {
@@ -37,6 +40,22 @@ const search = async (sum) => {
         errorMessage.value = error.data?.message || 'An error occurred while fetching the result';
     }
 };
+
+
+const customers = async (id) => {
+    try {
+        // Call the API with the entered sum
+        const response = await $fetch(`/api/customers/${id}`, {
+            method: 'GET',
+        });
+    } catch (error) {
+        // Handle the error and set the error message
+        errorMessage.value = error.data?.message || 'An error occurred while fetching the result';
+    }
+};
+
+
+
 
 
 const fortune = ref(null)
@@ -107,13 +126,13 @@ const fetchRandomLuckyPhoneNumber = async () => {
 const randomPhoneNumberData = ref(null);
 const error = ref(null);
 
-// Fetch the random phone number when the component is mounted
-onMounted(async () => {
-  try {
+
+
+const genRandomPhoneNumber = async () => {
+    try {
     const response = await fetchRandomLuckyPhoneNumber();
 
     if (response.status === 'success') {
-        console.log(1111)
       randomPhoneNumberData.value = response;
     } else {
       error.value = response.message;
@@ -121,6 +140,15 @@ onMounted(async () => {
   } catch (err) {
     error.value = err.message;
   }
+}
+
+
+
+// Fetch the random phone number when the component is mounted
+onMounted(async () => {
+
+    await genRandomPhoneNumber()
+
 });
 
 
@@ -210,6 +238,9 @@ onMounted(async () => {
                 </div>
                 <span class="text-555 fs-5">ผลทั้งหมด {{ sumOfScores }}</span>
             </div>
+
+            <button @click="genRandomPhoneNumber()" class="btn bg-white mt-4 p-1 ps-2 pe-2">สุ่มเบอร์มงคล</button>
+            <!-- <button @click="genRandomPhoneNumber" class="btn bg-white mt-4 p-1 ps-2 pe-2">สุ่มเบอร์มงคล</button> -->
 
             <div v-if="randomPhoneNumberData" class="mt-2 fs-4 text-ddd">
                 {{ randomPhoneNumberData.phoneNumber  }}
