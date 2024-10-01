@@ -55,13 +55,70 @@ const customers = async (id) => {
 };
 
 
+const checkDuplicated = async (phoneNumber) => {
+    try {
+        // Call the API to check if the phone number is duplicated
+        const response = await $fetch(`/api/leads/isDuplicated`, {
+            method: 'GET',
+            params: {
+                phone_number: phoneNumber,  // Pass the phone number as a query parameter
+            },
+        });
+
+        // If the API response indicates the phone number is duplicated, return true
+        if (response.body.isDuplicated) {
+            return true;  // Phone number is duplicated
+        }
+
+        return false;  // Phone number is not duplicated
+
+    } catch (error) {
+        console.error('Error checking phone number duplication:', error.message);
+        return false;  // Return false in case of an error
+    }
+};
+
+const updateSearchCount = async (phoneNumber) => {
+  try {
+    // Call the API to update the search_count for the given phone number
+    const response = await $fetch('/api/leads/search_count', {
+      method: 'PATCH',
+      body: { phone_number: phoneNumber },  // Send the phone number in the request body
+    });
+
+    // If the response is successful, log the result
+    console.log('Search count updated:', response);
+
+    return response;  // Return the API response if needed elsewhere
+  } catch (error) {
+    // Handle any errors during the API request
+    console.error('Error updating search count:', error.message);
+    return null;  // Return null or handle the error as needed
+  }
+};
+
+
+
+
+
+
 
 const addLeads = async () => {
+
+
+   
+
     try {
-     
         // Validate the phone number before sending the request
         if (!isPhoneNumberValid.value) {
             throw new Error('Invalid phone number');
+        }
+
+        const isDuplicated = await checkDuplicated(phone_number.value);
+        // Stop execution if the phone number is duplicated
+        if (isDuplicated) {
+            await updateSearchCount(phone_number.value)
+            return;
         }
 
 
@@ -70,7 +127,12 @@ const addLeads = async () => {
             phone_number: phone_number.value,
         };
 
-       
+        // ถ้ามีเบอร์โทรนี้ในระบบ
+
+        // ถ้ามีให้อัพเดทข้อมูล
+
+        // ถ้าไม่มีให้สร้างใหม่
+
 
         // Call the leads API using $fetch to insert the lead
         const response = await $fetch('/api/leads', {
@@ -78,12 +140,10 @@ const addLeads = async () => {
             body: leadData,  // Send lead data in the request body
         });
 
-        
 
 
-       
-       
         
+
 
         // Check if the API response is successful
         if (response.success) {

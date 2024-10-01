@@ -17,6 +17,8 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+
+
   // Insert the new lead into the leads table
   try {
     // Insert the lead data into the leads table using the db instance
