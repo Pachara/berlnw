@@ -56,6 +56,52 @@ const customers = async (id) => {
 
 
 
+const addLeads = async () => {
+    try {
+     
+        // Validate the phone number before sending the request
+        if (!isPhoneNumberValid.value) {
+            throw new Error('Invalid phone number');
+        }
+
+
+        // Create the data object to be sent to the API
+        const leadData = {
+            phone_number: phone_number.value,
+        };
+
+       
+
+        // Call the leads API using $fetch to insert the lead
+        const response = await $fetch('/api/leads', {
+            method: 'POST',
+            body: leadData,  // Send lead data in the request body
+        });
+
+        
+
+
+       
+       
+        
+
+        // Check if the API response is successful
+        if (response.success) {
+            console.log('Lead added successfully:', response.data);
+        } else {
+            throw new Error(response.message || 'Failed to add lead');
+        }
+    } catch (error) {
+        console.error('Error adding lead:', error.message);
+        alert(error.message || 'Failed to add lead');
+    }
+};
+
+
+
+
+
+
 
 
 const fortune = ref(null)
@@ -75,6 +121,7 @@ watch(phone_number, async (newVal) => {
     // When the phone number is exactly 10 digits and valid, perform the search
     if (newVal.length === 10 && isPhoneNumberValid.value) {
         fortune.value = await search(luckyNumberSum.value);
+        await addLeads()
     }
 });
 
