@@ -4,6 +4,7 @@ definePageMeta({
 });
 
 const leads = ref(null);
+
 const shopping_cart = ref([]); // Initialize as an empty array
 
 // Fetch leads data from the API
@@ -22,9 +23,13 @@ const getLeads = async () => {
 
 // Add phone number to shopping cart in sessionStorage
 const addToCart = (phoneNumber) => {
+
+  
+
   const shoppingCart = JSON.parse(sessionStorage.getItem('shoppingCart')) || [];
 
   if (!shoppingCart.some(item => item.phone_number === phoneNumber.phone_number)) {
+
     shoppingCart.push(phoneNumber);
     sessionStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
 
@@ -52,6 +57,7 @@ const deleteFromCart = (phoneNumber) => {
 
 // Load the shopping cart from sessionStorage when the component is mounted
 onMounted(async () => {
+
   const storedCart = sessionStorage.getItem('shoppingCart');
   if (!storedCart) {
     sessionStorage.setItem('shoppingCart', JSON.stringify([]));
@@ -91,7 +97,7 @@ onMounted(async () => {
        
          <ul class="text-888 list-unstyled">
                 <li v-for="(lead,i) in leads" :key="i">{{i+1}}. {{ lead.phone_number }} [{{ lead.search_count }}]
-                  <button @click="addToCart(lead)">Add</button>
+                  <button class="ms-2" @click="addToCart(lead)">Add</button>
                 </li>
             </ul>
             

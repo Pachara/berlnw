@@ -1,20 +1,25 @@
 <script setup>
-
 const route = useRoute();
+
+const history = useState('history');
 
 
 
 </script>
 <template>
     <div>
+        
         <nav>
             <ul class="list-unstyled  d-flex">
                 <!-- ตรวจเบอร์มงคล -->
                 <li class="me-2 p-1">
-                    <NuxtLink to="/berlnw"
+
+                    <NuxtLink to="/berlnw" 
                         :class="{ 'active text-orange': route.path === '/berlnw', 'text-white': route.path !== '/berlnw' }">
                         ตรวจเบอร์มงคล
                     </NuxtLink>
+
+                   
                 </li>
 
 
@@ -34,15 +39,21 @@ const route = useRoute();
                     </NuxtLink>
                 </li>
 
-               
+                <li class="me-2 p-1">
+                    <NuxtLink to="/history" style="font-size:0.9em;"
+                        :class="{ 'active text-orange': route.path === '/history', 'text-white': route.path !== '/history' }">
+                        ประวัติการค้น
+                    </NuxtLink>
+                </li>
             </ul>
         </nav>
     </div>
 </template>
 <style scoped>
-li a{
+li a {
     text-decoration: none !important;
 }
+
 .active {
     font-weight: bold !important;
 }

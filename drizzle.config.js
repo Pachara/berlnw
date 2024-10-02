@@ -2,14 +2,15 @@
 // Database Connections
 import { drizzle } from 'drizzle-orm/neon-http';
 import { neon } from '@neondatabase/serverless';
-import { pgTable, serial, varchar, integer, timestamp } from 'drizzle-orm/pg-core';
-
 // Initialize the Neon client with your connection string
 const sql = neon('postgresql://berlnw_owner:2wvNWIygZeR0@ep-small-wave-a1tv2csc.ap-southeast-1.aws.neon.tech/berlnw?sslmode=require');
 // Initialize Drizzle ORM with the Neon client
 const db = drizzle(sql);
 // Export the db instance for use in your application
 export default db;
+
+
+import { pgTable, serial, varchar, integer, timestamp } from 'drizzle-orm/pg-core';
 
 // Define the Leads table
 export const leadsTable = pgTable('leads', {

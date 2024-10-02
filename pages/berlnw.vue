@@ -5,7 +5,10 @@ definePageMeta({
 })
 
 const phone_number = ref(null)
+
 const history = useState('history', () => []);
+
+
 
 
 // Computed property for phone number validation
@@ -78,6 +81,7 @@ const checkDuplicated = async (phoneNumber) => {
         return false;  // Return false in case of an error
     }
 };
+
 
 const updateSearchCount = async (phoneNumber) => {
   try {
@@ -177,12 +181,20 @@ watch(phone_number, async (newVal) => {
 
     // When the phone number is exactly 10 digits and valid, perform the search
     if (newVal.length === 10 && isPhoneNumberValid.value) {
+
+
         fortune.value = await search(luckyNumberSum.value);
         await addLeads()
+
         history.value.push(
-            {phone_number :  phone_number.value,fortune :  fortune.value}
-           )
+            {
+                phone_number :  phone_number.value, fortune :  fortune.value
+            }
+        )
+
        
+
+
     }
 });
 
@@ -266,7 +278,9 @@ onMounted(async () => {
 <template>
     
     <div class="d-flex vh-100 align-items-center justify-content-center flex-column">
+        
         <MainMenu />
+
         <div class="input_container border rounded-2 p-2 text-center bg-111" style="border-color:#444 !important;">
 
             <h1 class="pt-3 fs-3 text-888 fw-bold mb-3">กรุณาใส่เบอร์โทรศัพท์</h1>
