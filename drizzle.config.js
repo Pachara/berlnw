@@ -15,7 +15,7 @@ export default db;
 export const leadsTable = pgTable('leads', {
   id: serial('id').primaryKey(),
   phone_number: varchar('phone_number', { length: 255 }).notNull().unique(), // Add .unique() for uniqueness
-  search_count: integer('search_count').default(0).notNull(),
+  search_count: integer('search_count').default(1).notNull(),
   created_at: timestamp('created_at').defaultNow().notNull(),
 });
 

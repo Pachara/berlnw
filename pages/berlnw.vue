@@ -5,6 +5,7 @@ definePageMeta({
 })
 
 const phone_number = ref(null)
+const history = useState('history', () => []);
 
 
 // Computed property for phone number validation
@@ -127,11 +128,7 @@ const addLeads = async () => {
             phone_number: phone_number.value,
         };
 
-        // ถ้ามีเบอร์โทรนี้ในระบบ
-
-        // ถ้ามีให้อัพเดทข้อมูล
-
-        // ถ้าไม่มีให้สร้างใหม่
+     
 
 
         // Call the leads API using $fetch to insert the lead
@@ -182,6 +179,10 @@ watch(phone_number, async (newVal) => {
     if (newVal.length === 10 && isPhoneNumberValid.value) {
         fortune.value = await search(luckyNumberSum.value);
         await addLeads()
+        history.value.push(
+            {phone_number :  phone_number.value,fortune :  fortune.value}
+           )
+       
     }
 });
 
@@ -263,7 +264,9 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="d-flex vh-100 align-items-center justify-content-center">
+    
+    <div class="d-flex vh-100 align-items-center justify-content-center flex-column">
+        <MainMenu />
         <div class="input_container border rounded-2 p-2 text-center bg-111" style="border-color:#444 !important;">
 
             <h1 class="pt-3 fs-3 text-888 fw-bold mb-3">กรุณาใส่เบอร์โทรศัพท์</h1>
@@ -359,6 +362,8 @@ onMounted(async () => {
 
 
         </div>
+
+
     </div>
 </template>
 
