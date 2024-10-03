@@ -277,9 +277,7 @@ onMounted(async () => {
 
 <template>
     
-    <div class="d-flex vh-100 align-items-center justify-content-center flex-column">
-        
-        <MainMenu />
+    <div>
 
         <div class="input_container border rounded-2 p-2 text-center bg-111" style="border-color:#444 !important;">
 

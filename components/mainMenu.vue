@@ -1,7 +1,11 @@
 <script setup>
 const route = useRoute();
 
-const history = useState('history');
+const shoppingCartNumber = useState('shoppingCartNumber');
+
+
+
+
 
 
 
@@ -43,6 +47,12 @@ const history = useState('history');
                     <NuxtLink to="/history" style="font-size:0.9em;"
                         :class="{ 'active text-orange': route.path === '/history', 'text-white': route.path !== '/history' }">
                         ประวัติการค้น
+                    </NuxtLink>
+                </li>
+                <li class="me-2 p-1">
+                    <NuxtLink to="/shopping_cart" style="font-size:0.9em;"
+                        :class="{ 'active text-orange': route.path === '/shopping_cart', 'text-white': route.path !== '/shopping_cart' }">
+                    Cart [{{ shoppingCartNumber }}]
                     </NuxtLink>
                 </li>
             </ul>
